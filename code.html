@@ -1,0 +1,83 @@
+<style>
+    body {
+
+background-image: url("docker1.png");
+background-repeat: no-repeat;
+background-size: auto;
+}
+    #userInput {
+    margin-top: 20px;
+    padding: 10px;
+
+  }
+
+  #in {
+    background-color: transparent;
+    border: 0ch;
+  }
+  
+#textBox
+{
+background-color: transparent;
+    border: 0ch;
+}
+
+
+  #out {
+      padding-left: 10px;
+      margin-top: 5px;
+      font-size: 18px;
+       color:black;
+       text-align: justify; 
+        border-style: solid;
+        border-width: 0px;
+      
+  }
+
+  #out ul {
+   list-style : none;
+  }
+  
+
+  #out  li,
+   th,
+     td{
+     padding-right : 45px;
+padding-left : 25px;
+padding-top : 7px;
+ text-align : left;
+
+</style>
+
+<script>
+
+    function command(e) {
+
+        if (e.keyCode == 13) {
+
+     
+document.getElementById('out').innerHTML = "";
+var i = document.getElementById("textBox").value;
+var req = new XMLHttpRequest();
+req.open("GET", "http://192.168.18.80/cgi-bin/web.py?x=" + i, false);
+req.send();
+var output = req.responseText;
+document.getElementById("out").innerHTML = output;
+
+
+document.getElementById('textBox').value = "";
+}
+    }
+
+</script>
+
+<div id="userInput">
+    <input type="text" value="root@localhost:~$" id="in" size="28" readonly="readonly">
+    <input type="text" id="textBox" onkeypress="command(event)" placeholder="Enter your command" size="40" autofocus>
+  </div>
+
+  <pre>
+    <div id="out"> </div>
+    </pre>
+
+
